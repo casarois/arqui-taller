@@ -1,0 +1,799 @@
+{
+ "_version": "3. Extraída de tus láminas: situación (v7), planta+secciones y fachadas (v6), axonometría. 'propuesta' = no existe aún en tus láminas. Cada proyecto puede ampliar o sobrescribir con normas_proyecto.json.",
+ "convencion": {
+  "patron": "<DIBUJO>_<NN>_<GRUPO>[_<SUB>]",
+  "dibujos": [
+   "LAMINA",
+   "3D",
+   "PLANTA",
+   "SECCION_LONG",
+   "SECCION_TRANS",
+   "ALZADO",
+   "AXON",
+   "DETALLE",
+   "PROPUESTA"
+  ],
+  "NN": "orden de dibujo y lectura: 00-09 base, rellenos debajo, líneas encima",
+  "sufijos": {
+   "_ARISTAS": "líneas",
+   "_RELLENOS": "hatch sólido; blanco = oculta lo de detrás",
+   "_SILUETA": "contorno exterior",
+   "_LINEA": "línea de terreno o agua",
+   "_DETALLE": "subdivisión fina"
+  },
+  "estilo": "MAYUSCULAS, sin tildes, color de impresión = color de capa, sin capas vacías ni 'Predefinito' con objetos"
+ },
+ "grosores_mm": {
+  "silueta": 0.35,
+  "terreno_corte": 0.3,
+  "primer_plano": 0.25,
+  "marco": 0.18,
+  "segundo_plano": 0.15,
+  "principal": 0.13,
+  "contorno": 0.09,
+  "detalle": 0.05,
+  "relleno": 0.0
+ },
+ "reduccion_conjunto": {
+  "_uso": "dibujo pequeño dentro de lámina de conjunto (ej. sección bajo planta): se baja un escalón",
+  "0.35": 0.18,
+  "0.30": 0.3,
+  "0.25": 0.13,
+  "0.18": 0.13,
+  "0.15": 0.09,
+  "0.13": 0.09,
+  "0.09": 0.05,
+  "0.05": 0.05
+ },
+ "paleta": {
+  "_uso": "un número = gris (0-255)",
+  "agua_linea": [
+   43,
+   85,
+   181
+  ],
+  "agua_fondo": [
+   94,
+   127,
+   200
+  ],
+  "agua_ondas": [
+   127,
+   152,
+   210
+  ],
+  "agua_1": [
+   223,
+   231,
+   246
+  ],
+  "agua_2": [
+   201,
+   214,
+   239
+  ],
+  "agua_3": [
+   176,
+   195,
+   230
+  ],
+  "volumen_claro": [
+   238,
+   242,
+   250
+  ],
+  "nuevo": [
+   200,
+   30,
+   30
+  ],
+  "derribo": [
+   230,
+   180,
+   0
+  ],
+  "proyecto": [
+   31,
+   79,
+   168
+  ],
+  "proyecto_oscuro": [
+   22,
+   58,
+   125
+  ],
+  "proyecto_claro": [
+   223,
+   230,
+   245
+  ],
+  "proyecto_panel": [
+   201,
+   211,
+   236
+  ]
+ },
+ "lineas": {
+  "continua": "Continuous",
+  "discontinua": "Dashed",
+  "eje": "DashDot"
+ },
+ "plantillas": {
+  "lamina": {
+   "LAMINA_00_PAPEL": [
+    "relleno",
+    255
+   ],
+   "LAMINA_01_MARCO": [
+    "primer_plano",
+    22
+   ],
+   "LAMINA_02_MARCO_DIBUJO": [
+    "marco",
+    22
+   ],
+   "LAMINA_03_CABECERA": [
+    "principal",
+    22
+   ],
+   "LAMINA_04_COLUMNA_FONDO": [
+    "relleno",
+    239
+   ],
+   "LAMINA_04_COLUMNA_SEPARADORES": [
+    "contorno",
+    "proyecto",
+    "eje"
+   ],
+   "LAMINA_05_TITULO": [
+    "relleno",
+    22
+   ],
+   "LAMINA_05_TEXTOS": [
+    "relleno",
+    22
+   ],
+   "LAMINA_06_ESCALA_NORTE": [
+    "relleno",
+    22
+   ],
+   "LAMINA_07_PIE": [
+    "relleno",
+    22
+   ],
+   "LAMINA_09_GUIAS": [
+    "relleno",
+    [
+     0,
+     200,
+     255
+    ],
+    "continua"
+   ],
+   "LAMINA_04_COLUMNA_*": [
+    "detalle",
+    22
+   ]
+  },
+  "planta_urbana": {
+   "PLANTA_01_EDIFICIOS_RELLENO": [
+    "relleno",
+    211
+   ],
+   "PLANTA_01_EDIFICIOS_RELLENO_SINGULAR": [
+    "relleno",
+    160
+   ],
+   "PLANTA_01_EDIFICIOS_CONTORNO": [
+    "contorno",
+    60
+   ],
+   "PLANTA_01_EDIFICIOS_DIVISIONES": [
+    "detalle",
+    175
+   ],
+   "PLANTA_01_MARQUESINAS": [
+    "detalle",
+    140
+   ],
+   "PLANTA_02_CALZADAS": [
+    "principal",
+    46
+   ],
+   "PLANTA_02_ACERAS": [
+    "detalle",
+    143
+   ],
+   "PLANTA_02_ISLETAS": [
+    "contorno",
+    90
+   ],
+   "PLANTA_02_MUROS": [
+    "contorno",
+    74
+   ],
+   "PLANTA_02_ESCALERAS": [
+    "detalle",
+    106
+   ],
+   "PLANTA_02_JARDINERAS": [
+    "detalle",
+    143
+   ],
+   "PLANTA_02_VALLAS": [
+    "detalle",
+    138
+   ],
+   "PLANTA_02_TRANVIA": [
+    "detalle",
+    154,
+    "discontinua"
+   ],
+   "PLANTA_02_PASO_INFERIOR": [
+    "detalle",
+    160,
+    "discontinua"
+   ],
+   "PLANTA_03_CURVAS_NIVEL": [
+    "contorno",
+    122
+   ],
+   "PLANTA_03_CURVAS_NIVEL_MAESTRAS": [
+    "segundo_plano",
+    63
+   ],
+   "PLANTA_04_AGUA_RELLENO_1": [
+    "relleno",
+    "agua_1"
+   ],
+   "PLANTA_04_AGUA_RELLENO_2": [
+    "relleno",
+    "agua_2"
+   ],
+   "PLANTA_04_AGUA_RELLENO_3": [
+    "relleno",
+    "agua_3"
+   ],
+   "PLANTA_04_AGUA_ORILLA": [
+    "primer_plano",
+    "agua_linea"
+   ],
+   "PLANTA_04_AGUA_CURVAS_FONDO": [
+    "contorno",
+    "agua_fondo"
+   ],
+   "PLANTA_04_AGUA_ONDAS": [
+    "detalle",
+    "agua_ondas"
+   ],
+   "PLANTA_04_CANAL_SOTERRADO": [
+    "principal",
+    "agua_linea",
+    "discontinua"
+   ],
+   "PLANTA_05_ARBOLES_COPAS": [
+    "detalle",
+    95
+   ],
+   "PLANTA_05_ARBOLES_TEXTURA": [
+    "detalle",
+    138
+   ],
+   "PLANTA_05_ARBOLES_TRONCOS": [
+    "detalle",
+    58
+   ],
+   "PLANTA_06_ARQUITECTURAS": [
+    "principal",
+    20
+   ],
+   "PLANTA_06_ARQUITECTURAS_CONTORNO": [
+    "contorno",
+    42
+   ],
+   "PLANTA_06_ARQUITECTURAS_DETALLE": [
+    "detalle",
+    42
+   ],
+   "PLANTA_06_ARQUITECTURAS_BASE": [
+    "relleno",
+    255
+   ],
+   "PLANTA_07_MOBILIARIO": [
+    "detalle",
+    46
+   ],
+   "PLANTA_08_LINEAS_SECCION": [
+    "principal",
+    20,
+    "eje"
+   ],
+   "PLANTA_09_RECORRIDOS": [
+    "relleno",
+    255
+   ],
+   "PLANTA_09_RECORRIDOS_BORDES": [
+    "contorno",
+    74
+   ],
+   "PLANTA_02_APARCAMIENTO": [
+    "detalle",
+    124
+   ],
+   "PLANTA_02_PEATONAL": [
+    "detalle",
+    154,
+    "discontinua"
+   ],
+   "PLANTA_02_DEPORTIVO": [
+    "detalle",
+    138
+   ],
+   "PLANTA_02_MONUMENTOS": [
+    "contorno",
+    74
+   ],
+   "PLANTA_02_VARIOS": [
+    "detalle",
+    138
+   ]
+  },
+  "planta_edificio": {
+   "_estado": "propuesta",
+   "PLANTA_10_MUROS_CORTE": [
+    "silueta",
+    20
+   ],
+   "PLANTA_10_MUROS_CORTE_RELLENO": [
+    "relleno",
+    60
+   ],
+   "PLANTA_11_PILARES": [
+    "silueta",
+    20
+   ],
+   "PLANTA_12_CARPINTERIA": [
+    "principal",
+    20
+   ],
+   "PLANTA_12_PUERTAS_GIRO": [
+    "detalle",
+    90
+   ],
+   "PLANTA_13_VISTA": [
+    "contorno",
+    74
+   ],
+   "PLANTA_14_PROYECCIONES": [
+    "contorno",
+    110,
+    "discontinua"
+   ],
+   "PLANTA_15_MOBILIARIO": [
+    "detalle",
+    143
+   ],
+   "PLANTA_16_PAVIMENTO": [
+    "detalle",
+    185
+   ],
+   "PLANTA_90_COTAS": [
+    "detalle",
+    20
+   ],
+   "PLANTA_91_TEXTOS": [
+    "principal",
+    20
+   ],
+   "PLANTA_92_EJES": [
+    "detalle",
+    143,
+    "eje"
+   ]
+  },
+  "fachada": {
+   "_uso": "prefijo = ALZADO_<NOMBRE>, SECCION_LONG o SECCION_TRANS. Dentro de lámina de conjunto: reducir=True",
+   "{P}_01_PRIMER_PLANO_ARISTAS": [
+    "primer_plano",
+    0
+   ],
+   "{P}_01_PRIMER_PLANO_RELLENOS": [
+    "relleno",
+    255
+   ],
+   "{P}_02_SEGUNDO_PLANO_ARISTAS": [
+    "segundo_plano",
+    74
+   ],
+   "{P}_02_SEGUNDO_PLANO_RELLENOS": [
+    "relleno",
+    255
+   ],
+   "{P}_03_FONDO_ARISTAS": [
+    "contorno",
+    143
+   ],
+   "{P}_03_FONDO_RELLENOS": [
+    "relleno",
+    255
+   ],
+   "{P}_04_SILUETA": [
+    "silueta",
+    0
+   ],
+   "{P}_05_DETALLE_01_HUECOS": [
+    "principal",
+    0
+   ],
+   "{P}_05_DETALLE_02_ARCOS": [
+    "principal",
+    0
+   ],
+   "{P}_05_DETALLE_03_CONTRAVENTANAS": [
+    "contorno",
+    110
+   ],
+   "{P}_05_DETALLE_04_IMPOSTAS_CORNISAS": [
+    "contorno",
+    60
+   ],
+   "{P}_05_DETALLE_05_CUBIERTAS": [
+    "contorno",
+    122
+   ],
+   "{P}_05_DETALLE_06_PLANTA_BAJA": [
+    "principal",
+    0
+   ],
+   "{P}_05_DETALLE_07_TEXTURA_MURO": [
+    "detalle",
+    176
+   ],
+   "{P}_05_DETALLE_08_BALCONES": [
+    "detalle",
+    60
+   ]
+  },
+  "seccion_paisaje": {
+   "_uso": "se combina con 'fachada' (reducir=True) en la misma sección",
+   "{P}_06_ARBOLES": [
+    "detalle",
+    122
+   ],
+   "{P}_06_ARBOLES_FONDO": [
+    "detalle",
+    180
+   ],
+   "{P}_07_TERRENO": [
+    "relleno",
+    227
+   ],
+   "{P}_07_TERRENO_LINEA": [
+    "terreno_corte",
+    20
+   ],
+   "{P}_08_AGUA": [
+    "relleno",
+    "agua_2"
+   ],
+   "{P}_08_AGUA_LAMINA": [
+    "segundo_plano",
+    "agua_linea"
+   ],
+   "{P}_09_ARQUITECTURAS": [
+    "segundo_plano",
+    20
+   ],
+   "{P}_09_VOLUMENES": [
+    "relleno",
+    "volumen_claro"
+   ],
+   "{P}_10_PERSONAS": [
+    "detalle",
+    138
+   ]
+  },
+  "propuesta": {
+   "PROPUESTA_01_NUEVO": [
+    "principal",
+    "nuevo"
+   ],
+   "PROPUESTA_02_DERRIBO": [
+    "principal",
+    "derribo",
+    "discontinua"
+   ]
+  },
+  "modelo_3d": {
+   "_uso": "modelo de trabajo (no se imprime). Piezas del proyecto: 3D_04_PROY_<PIEZA>[_ESTRUCTURA|_PANELES]",
+   "3D_01_SUELO": [
+    "relleno",
+    150
+   ],
+   "3D_02_CONTEXTO": [
+    "relleno",
+    235
+   ],
+   "3D_03_SINGULARES": [
+    "relleno",
+    190
+   ],
+   "3D_04_PROY": [
+    "relleno",
+    "proyecto"
+   ],
+   "3D_05_VEGETACION": [
+    "relleno",
+    140
+   ],
+   "3D_06_PERSONAS": [
+    "relleno",
+    60
+   ],
+   "3D_04_PROY_*": [
+    "relleno",
+    "proyecto"
+   ]
+  },
+  "axon": {
+   "_uso": "de tu axonometría. El proyecto en negro/azul destaca sobre contexto gris",
+   "AXON_00_FONDO": [
+    "relleno",
+    255
+   ],
+   "AXON_01_VERDE": [
+    "relleno",
+    236
+   ],
+   "AXON_01_VERDE_CONTORNO": [
+    "detalle",
+    138
+   ],
+   "AXON_01_VERDE_ENTORNO": [
+    "relleno",
+    240
+   ],
+   "AXON_02_CALZADAS": [
+    "detalle",
+    125
+   ],
+   "AXON_02_ACERAS": [
+    "detalle",
+    140
+   ],
+   "AXON_02_CAMINOS": [
+    "detalle",
+    60
+   ],
+   "AXON_02_MUROS": [
+    "detalle",
+    60
+   ],
+   "AXON_02_ESCALERAS": [
+    "detalle",
+    125
+   ],
+   "AXON_02_TRANVIA": [
+    "detalle",
+    154,
+    "discontinua"
+   ],
+   "AXON_03_RECORRIDO_PROYECTO": [
+    "primer_plano",
+    "proyecto",
+    "discontinua"
+   ],
+   "AXON_04_SOMBRA_EDIFICIOS": [
+    "relleno",
+    205
+   ],
+   "AXON_04_SOMBRA_VEGETACION": [
+    "relleno",
+    218
+   ],
+   "AXON_05_CONTEXTO_CUBIERTAS": [
+    "detalle",
+    58
+   ],
+   "AXON_05_CONTEXTO_FACHADAS": [
+    "detalle",
+    58
+   ],
+   "AXON_05_CONTEXTO_PLANTAS": [
+    "detalle",
+    185
+   ],
+   "AXON_06_SINGULARES": [
+    "contorno",
+    42
+   ],
+   "AXON_07_ARBOLES_COPAS": [
+    "detalle",
+    86
+   ],
+   "AXON_07_ARBOLES_SOMBRA_COPA": [
+    "relleno",
+    203
+   ],
+   "AXON_07_ARBOLES_TEXTURA": [
+    "detalle",
+    126
+   ],
+   "AXON_07_ARBOLES_TRONCOS": [
+    "contorno",
+    106
+   ],
+   "AXON_08_PERSONAS": [
+    "relleno",
+    27
+   ],
+   "AXON_09_PROYECTO": [
+    "principal",
+    16
+   ],
+   "AXON_09_PROYECTO_CUBIERTA": [
+    "relleno",
+    "proyecto_claro"
+   ],
+   "AXON_09_PROYECTO_ESTRUCTURA": [
+    "contorno",
+    "proyecto_oscuro"
+   ],
+   "AXON_09_PROYECTO_PANELES": [
+    "detalle",
+    "proyecto"
+   ],
+   "AXON_10_PROYECTO_CONTORNO": [
+    "primer_plano",
+    22
+   ],
+   "AXON_11_ETIQUETAS": [
+    "relleno",
+    22
+   ],
+   "AXON_11_ETIQUETAS_FONDO": [
+    "relleno",
+    255
+   ],
+   "AXON_09_PROYECTO_*": [
+    "principal",
+    16
+   ],
+   "AXON_01_VERDE_PUNTEADO": [
+    "principal",
+    143
+   ],
+   "AXON_01_VERDE_ENTORNO_CONTORNO": [
+    "detalle",
+    180
+   ],
+   "AXON_02_ISLETAS": [
+    "detalle",
+    180
+   ],
+   "AXON_11_TOPONIMOS": [
+    "relleno",
+    22
+   ],
+   "AXON_11_TOPONIMOS_FONDO": [
+    "relleno",
+    255
+   ],
+   "AXON_12_NORTE": [
+    "relleno",
+    22
+   ],
+   "AXON_12_TITULO": [
+    "relleno",
+    22
+   ],
+   "AXON_12_TITULO_FONDO": [
+    "relleno",
+    255
+   ]
+  }
+ },
+ "equivalencias_antiguas": {
+  "_uso": "patrón con * -> destino con *. Gana el patrón más largo. Las de un proyecto concreto van en su normas_proyecto.json",
+  "00_MARCO": "LAMINA_01_MARCO",
+  "LAMINA_MARCO": "LAMINA_01_MARCO",
+  "LAMINA_MARCO_*": "LAMINA_02_MARCO_DIBUJO",
+  "CABECERA": "LAMINA_03_CABECERA",
+  "COLUMNA_FONDO": "LAMINA_04_COLUMNA_FONDO",
+  "COLUMNA_SEPARADORES": "LAMINA_04_COLUMNA_SEPARADORES",
+  "COLUMNA_TITULO": "LAMINA_05_TITULO",
+  "COLUMNA_TEXTOS": "LAMINA_05_TEXTOS",
+  "COLUMNA_ESCALA": "LAMINA_06_ESCALA_NORTE",
+  "PIE_TEXTOS": "LAMINA_07_PIE",
+  "LONGITUDINAL_*": "ALZADO_LONG_*",
+  "TRANSVERSAL_*": "ALZADO_TRANS_*",
+  "SECCION_LONG_01_FACHADAS_ARISTAS_PRIMER_PLANO": "SECCION_LONG_01_PRIMER_PLANO_ARISTAS",
+  "SECCION_LONG_01_FACHADAS_ARISTAS_SEGUNDO_PLANO": "SECCION_LONG_02_SEGUNDO_PLANO_ARISTAS",
+  "SECCION_LONG_01_FACHADAS_ARISTAS_FONDO": "SECCION_LONG_03_FONDO_ARISTAS",
+  "SECCION_LONG_01_FACHADAS_RELLENOS": "SECCION_LONG_01_PRIMER_PLANO_RELLENOS",
+  "SECCION_LONG_01_FACHADAS_SILUETA": "SECCION_LONG_04_SILUETA",
+  "SECCION_LONG_02_*": "SECCION_LONG_06_*",
+  "SECCION_LONG_03_*": "SECCION_LONG_07_*",
+  "SECCION_LONG_04_*": "SECCION_LONG_08_*",
+  "SECCION_LONG_05_*": "SECCION_LONG_09_*",
+  "SECCION_LONG_06_*": "SECCION_LONG_10_*",
+  "Predefinito": "(capa por defecto: mover objetos a su capa)",
+  "Default": "(capa por defecto: mover objetos a su capa)",
+  "SECCION_TRANS_01_FACHADAS_ARISTAS_PRIMER_PLANO": "SECCION_TRANS_01_PRIMER_PLANO_ARISTAS",
+  "SECCION_TRANS_01_FACHADAS_ARISTAS_SEGUNDO_PLANO": "SECCION_TRANS_02_SEGUNDO_PLANO_ARISTAS",
+  "SECCION_TRANS_01_FACHADAS_ARISTAS_FONDO": "SECCION_TRANS_03_FONDO_ARISTAS",
+  "SECCION_TRANS_01_FACHADAS_RELLENOS": "SECCION_TRANS_01_PRIMER_PLANO_RELLENOS",
+  "SECCION_TRANS_01_FACHADAS_SILUETA": "SECCION_TRANS_04_SILUETA",
+  "SECCION_TRANS_02_*": "SECCION_TRANS_06_*",
+  "SECCION_TRANS_03_*": "SECCION_TRANS_07_*",
+  "SECCION_TRANS_04_*": "SECCION_TRANS_08_*",
+  "SECCION_TRANS_05_*": "SECCION_TRANS_09_*",
+  "SECCION_TRANS_06_*": "SECCION_TRANS_10_*",
+  "*_01_FACHADAS_DETALLE_HUECOS": "*_05_DETALLE_01_HUECOS",
+  "*_01_FACHADAS_DETALLE_ARCOS": "*_05_DETALLE_02_ARCOS",
+  "*_01_FACHADAS_DETALLE_CONTRAVENTANAS": "*_05_DETALLE_03_CONTRAVENTANAS",
+  "*_01_FACHADAS_DETALLE_IMPOSTAS_CORNISAS": "*_05_DETALLE_04_IMPOSTAS_CORNISAS",
+  "*_01_FACHADAS_DETALLE_CUBIERTAS": "*_05_DETALLE_05_CUBIERTAS",
+  "*_01_FACHADAS_DETALLE_PLANTA_BAJA": "*_05_DETALLE_06_PLANTA_BAJA",
+  "*_01_FACHADAS_DETALLE_TEXTURA_MURO": "*_05_DETALLE_07_TEXTURA_MURO",
+  "*_01_FACHADAS_DETALLE_BALCONES": "*_05_DETALLE_08_BALCONES",
+  "PLANTA_08_LINEAS_DE_SECCION": "PLANTA_08_LINEAS_SECCION",
+  "COLUMNA_MARCO": "LAMINA_02_MARCO_DIBUJO"
+ },
+ "unidades": "Comprobar siempre. Láminas v6/v7 en mm; fachadas detalle en m.",
+ "textos": {
+  "_estado": "propuesta (en tus láminas los textos van sin grosor, en negro 22, con fondo blanco detrás)",
+  "fuente": "Arial",
+  "titulo_mm": 7.0,
+  "subtitulo_mm": 4.0,
+  "pie_dibujo_mm": 2.5,
+  "etiqueta_mm": 2.0,
+  "cota_mm": 1.8,
+  "fondo_detras": true
+ },
+ "composicion": {
+  "_estado": "propuesta (prueba v7, 2026-11-08: el crítico pidió 2 mm; la v7 tocaba un edificio y Opus solo dejó 0,73 mm). Confirmar con el usuario.",
+  "holgura_proyecto_contexto_mm": 2.0,
+  "_holgura": "separación mínima en papel entre el proyecto (PLANTA_06_*) y el contexto construido (PLANTA_01_*); se comprueba con revision/holgura.py"
+ },
+ "escalas": {
+  "situacion": 1000,
+  "implantacion": 500,
+  "planta": 100,
+  "seccion": 100,
+  "alzado": 100,
+  "detalle": 20
+ },
+ "formatos_mm": {
+  "A1": [
+   841,
+   594
+  ],
+  "A2": [
+   594,
+   420
+  ],
+  "A3": [
+   420,
+   297
+  ]
+ },
+ "nombres": {
+  "trabajo": "Lamina_<FORMATO>_<Tema>_editable.3dm + .dwg + .pdf + _preview.png, en carpeta vN",
+  "entrega": "<Proyecto>_<Autor>_<FORMATO>-180_<Tema>  (ej. LaPuerta_LuciaAlonso_A2-180_Collage) — confirmar qué es 180",
+  "version": "Cada cambio se guarda en la carpeta vN+1 del dibujo; nunca se sobrescribe."
+ },
+ "export": {
+  "dpi_pdf": 300,
+  "preview_px": 2400
+ },
+ "maquetacion": {
+  "_estado": "estructura de tu lámina de axonometría; medidas propuesta",
+  "estructura": "cabecera + dibujo principal (marco de dibujo) + columna lateral de información + pie",
+  "margen_mm": 10,
+  "columnas": 12,
+  "medianil_mm": 5,
+  "columna_info": "derecha, 1/4 del ancho útil",
+  "pie_dibujo": "NOMBRE DEL DIBUJO · E 1:___"
+ }
+}

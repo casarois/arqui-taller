@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "deny": [
+      "Agent(general-purpose)",
+      "Agent(claude)",
+      "Agent(fork)"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+# Proyectos de arquitectura: .3dm de cientos de MB, no es código
+proyectos/
+
+# Registros que escriben los hooks y el control de uso
+registro/
+
+# Archivos de Rhino (pesados) en cualquier carpeta
+*.3dm
+*.3dmbak
+*.rhl
+
+# Pruebas de regresión: archivos fijos (copias) y salidas de cada ejecución
+scripts/pruebas/archivos/
+scripts/pruebas/salida/
+
+# Python
+__pycache__/
+*.pyc
+
+# Configuración local personal de Claude Code
+.claude/settings.local.json
