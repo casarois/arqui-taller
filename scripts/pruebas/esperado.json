@@ -1,0 +1,69 @@
+{
+  "_uso": "Una entrada por prueba. archivo: en archivos\\. caso: en casos\\ (imprime RESULTADO {json}). modifica=true -> copia y Rhino propios; false -> comparte Rhino con las de solo lectura del mismo archivo, en el orden de esta lista. parametros: los lee el caso (PARAMS). esperado: por clave del JSON del caso, {valor, tol} | {igual} | {min} | {max}.",
+  "pruebas": [
+    {
+      "nombre": "holgura_original", "script": "holgura", "archivo": "v7_original.3dm", "caso": "caso_holgura.py", "modifica": false,
+      "parametros": {"zona": [338, 160, 392, 238]},
+      "esperado": {
+        "unidades": {"igual": "Millimeters"},
+        "distancia_min_mm": {"valor": 0.00, "tol": 0.01},
+        "doc_modificado": {"igual": false}
+      }
+    },
+    {
+      "nombre": "captura_zona", "script": "captura", "archivo": "v7_original.3dm", "caso": "caso_captura.py", "modifica": false,
+      "parametros": {"zona": [335, 150, 392, 238], "ppmm": 10},
+      "esperado": {
+        "ancho_px": {"igual": 570},
+        "alto_px": {"igual": 880},
+        "tinta": {"min": 0.02},
+        "dentro_de_salida": {"igual": true},
+        "doc_modificado": {"igual": false}
+      }
+    },
+    {
+      "nombre": "exportar_sin_layouts", "script": "exportar", "archivo": "v7_original.3dm", "caso": "caso_exportar.py", "modifica": false,
+      "parametros": {"tema": "Prueba", "formato": "A2", "pdf": true, "dwg": false, "preview": true, "editable": false},
+      "esperado": {
+        "layouts_antes": {"igual": 0},
+        "pdf_paginas": {"igual": 1},
+        "pdf_ancho_mm": {"valor": 594, "tol": 0.5},
+        "pdf_alto_mm": {"valor": 420, "tol": 0.5},
+        "pdf_cajas_distintas": {"igual": 1},
+        "pdf_kb": {"min": 100},
+        "preview_tinta": {"min": 0.02},
+        "preview_ancho_px": {"igual": 2400},
+        "preview_alto_px": {"valor": 1697, "tol": 1},
+        "archivos_en_salida": {"igual": 2},
+        "archivos_fuera_de_salida": {"igual": 0},
+        "layouts_despues": {"igual": 0},
+        "doc_modificado": {"igual": false}
+      }
+    },
+    {
+      "nombre": "holgura_equipo", "script": "holgura", "archivo": "v7_equipo.3dm", "caso": "caso_holgura.py", "modifica": false,
+      "parametros": {"zona": [338, 160, 392, 238]},
+      "esperado": {
+        "distancia_min_mm": {"valor": 2.27, "tol": 0.01}
+      }
+    },
+    {
+      "nombre": "holgura_opus_solo", "script": "holgura", "archivo": "v7_opus_solo.3dm", "caso": "caso_holgura.py", "modifica": false,
+      "parametros": {"zona": [338, 160, 392, 238]},
+      "esperado": {
+        "distancia_min_mm": {"valor": 0.73, "tol": 0.01}
+      }
+    },
+    {
+      "nombre": "recortar_base_dentro", "script": "recortar_base", "archivo": "v7_original.3dm", "caso": "caso_recortar_base.py", "modifica": true,
+      "parametros": {"lado": 35, "centro": [362.6, 195.5], "giro_grados": 14, "margen": 0.2, "lado_recorte": "dentro",
+                     "capas": ["PLANTA_04_CURVAS_NIVEL", "PLANTA_05_LAGO_"], "aplicar": true},
+      "esperado": {
+        "unidades": {"igual": "Millimeters"},
+        "curvas_recortadas": {"min": 1},
+        "curvas_dentro": {"igual": 0},
+        "distancia_min": {"valor": 0.2, "tol": 0.01}
+      }
+    }
+  ]
+}

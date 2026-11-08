@@ -14,7 +14,8 @@ En las carpetas de proyectos no va ningún script: todos viven aquí.
 | `lamina\` | Maquetación de láminas y layouts (aún vacía: todo pendiente) |
 | `postpro\` | Paso a Photoshop/GIMP (aún vacía: todo pendiente) |
 | `entrega\` | Reunir y renombrar la entrega (aún vacía: todo pendiente) |
-| `sistema\` | Funcionamiento del equipo (hook de subagentes) y alias del control de uso |
+| `sistema\` | Funcionamiento del equipo (hooks de subagentes y de código improvisado) y alias del control de uso |
+| `pruebas\` | Pruebas de regresión de los scripts "listos": `probar.ps1`, casos (`casos\`), valores esperados (`esperado.json`), archivos fijos (`archivos\`, solo lectura) y resultados (`salida\`). Cómo añadir una: `LEEME.md` |
 
 | Carpeta | Script | Qué hace | Parámetros | Dónde | Estado |
 |---|---|---|---|---|---|
@@ -50,7 +51,9 @@ En las carpetas de proyectos no va ningún script: todos viven aquí.
 | postpro | ps_montar.jsx | Monta PSD con los PNG en grupos fijos | `carpeta_png, formato` | Photoshop | pendiente |
 | entrega | entrega.py | Última versión → comprobar → renombrar → imprimir/ | `carpeta, laminas, datos, simular=True` | Python | pendiente |
 | sistema | uso_encargo.ps1 | **Alias**: reenvía a la skill general `UNI\CLAUDE\.claude\skills\control-uso\uso_encargo.ps1`, que es donde vive el script. Control de uso por encargo: % de 5 h y semanal (toda la cuenta, lo lee el orquestador con `get_usage`) antes/después/gastado, y tokens reales y coste equivalente API por modelo de esta sesión + subagentes (de la transcripción local, no les afectan otras sesiones). Además estima el % semanal y de 5 h del encargo a partir del coste (calibrado con tus encargos: ≈ 300 $/semana y ≈ 43 $/5 h; `-Fase calibrar` lo recalcula) y anota el gasto de todas las sesiones del ordenador en ese tiempo. Imprime el cuadro y lo anota en `UNI\CLAUDE\registro-uso\uso_encargos.csv`; avisa si se reinicia una ventana o se supera el límite semanal | `Fase inicio\|fin, Encargo, Uso5h, UsoSemanal, Reinicio5h, ReinicioSemanal, Transcripcion="" (auto), LimiteSemanal=10, ValorSemanal=300, Valor5h=43` | PowerShell | listo |
+| pruebas | probar.ps1 | Pruebas de regresión: por cada archivo de `archivos\` hace una copia nueva en `salida\<aaaammdd_hhmmss>\`, la abre con `abrir_rhino.ps1`, ejecuta los casos de `esperado.json` (`casos\_comun.py` + `casos\caso_*.py`, que imprimen `RESULTADO {json}`), compara con tolerancias y cierra el Rhino sin guardar pase lo que pase. Solo lectura del mismo archivo: un Rhino compartido; `modifica=true`: copia y Rhino propios. Una línea por prueba (OK / FALLO obtenido vs esperado) y `PRUEBAS: n OK, m FALLO`; código 0 todo OK, 1 algún fallo, 2 ninguna prueba. Cubre captura, holgura, recortar_base y exportar (sin layouts). Ejecutar tras cambiar cualquier script probado | `Solo=""` (nombre o script, admite comodines), `Esperado=""` (otro json) | PowerShell | listo |
 | sistema | hook_equipo.ps1 | Hook: bloquea `model` al lanzar subagentes y subagentes genéricos; registra en `registro\equipo.log`. Solo actúa dentro de arqui-taller | — | PowerShell | listo |
+| sistema | hook_codigo.ps1 | Hook PreToolUse `Write\|Edit` (en la configuración de usuario): en sesiones de arqui-taller, cada `.py` escrito o editado **fuera de `scripts\`** (código improvisado) se anota en `registro\codigo_improvisado.log` (fecha · agente · herramienta · ruta · líneas · primera línea). Nunca bloquea. El orquestador lo pasa a `MEJORAS.md` (regla 8) | JSON por stdin | PowerShell | listo |
 
 ## Entrada Codex (fuentes comunes, configuración independiente)
 

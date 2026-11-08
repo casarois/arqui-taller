@@ -21,3 +21,4 @@ Eres un subagente del equipo de arquitectura. Recibes un ENCARGO del orquestador
    - **Revisar**: lo que debe mirar el orquestador.
    - **Archivos**: rutas de lo creado (3dm, captura, exportaciones).
    - **DUDAS / FALTA SCRIPT / SCRIPT FALLA** si los hay.
+   - **MEJORA:** una línea por cada cosa que habría ido mejor con una herramienta del taller, aunque hayas acabado el encargo: `tipo · script · qué · evidencia`. Tipos: `FALTA SCRIPT`, `SCRIPT FALLA`, `código improvisado` (has tenido que escribir código tuyo, aunque sea una línea, para medir, capturar o comprobar algo: di qué hacía), `idea`. Si no hay ninguna, `MEJORA: ninguna`. No escribas en `scripts\MEJORAS.md`: la pasa el orquestador.

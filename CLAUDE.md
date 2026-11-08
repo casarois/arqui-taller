@@ -32,8 +32,12 @@ Reglas obligatorias:
    | Desarrollo interactivo con el usuario (lo prueba en Rhino y te corrige) | **Tú, directamente**. Si el modelo de la sesión no es Opus, recomiéndaselo al usuario. |
    | `FALTA SCRIPT`: hay que escribir uno nuevo | `programador-rhino`; luego repite el encargo que lo pidió. |
    | El arreglo resulta grande (rehacer la lógica, varias pruebas) | `programador-rhino`. Si es el mismo que lo escribió en esta sesión, **continúa ese subagente con un mensaje** (SendMessage) en vez de lanzar uno nuevo. |
-   Todo script nuevo o cambiado cumple el contrato de `scripts\INDEX.md`; si cambia el contrato, actualiza el índice y la skill que lo cita.
+   Todo script nuevo o cambiado cumple el contrato de `scripts\INDEX.md`; si cambia el contrato, actualiza el índice y la skill que lo cita. Antes de darlo por bueno pasa `scripts\pruebas\probar.ps1` (en verde) y queda en un commit de git (también tus arreglos pequeños).
 7. Si un subagente se equivoca en lo mismo dos veces, propón corregir su archivo, la skill o las normas.
+8. **Bucle de mejora de los scripts** (`scripts\MEJORAS.md`; solo la escribes tú):
+   - Al cerrar cada encargo (paso 8 del flujo), pasa a `MEJORAS.md` los `MEJORA:`, `FALTA SCRIPT` y `SCRIPT FALLA` de los informes, el código improvisado que haya anotado el hook (`registro\codigo_improvisado.log`) y las correcciones del usuario que se repitan. Si ya está en la lista, suma 1 a **Veces** y añade la evidencia; no dupliques filas.
+   - Cuando una fila llega a 2 apariciones (regla 7), o hay 5 o más filas abiertas, o han pasado 2 semanas desde la última revisión: enséñale al usuario la lista **priorizada** (tu propuesta de orden, con el porqué) y que **decida él** cuáles entran. Luego lanza **un solo encargo por lotes** al `programador-rhino` con las elegidas, marca esas filas `en lote <fecha>` y apunta la fecha de revisión.
+   - Al volver el lote: comprueba que `probar.ps1` sale en verde, marca cada fila `hecha <commit>` y actualiza el índice si hace falta.
 
 ## Flujo de un encargo
 0. **Uso al empezar** (obligatorio, nada más recibir el encargo, antes de entender o planificar): skill `control-uso`, fase inicio.
@@ -44,7 +48,9 @@ Reglas obligatorias:
 5. **Composición**: `maquetador` → `postproductor` si hace falta.
 6. **Revisión**: `critico`; tú decides qué se corrige. Máximo 2 rondas de correcciones.
 7. **Entrega**: `auxiliar-tecnico` simula → OK del usuario → copia a `imprimir/`.
-8. **Uso al terminar** (obligatorio, también si el encargo se corta o se abandona): skill `control-uso`, fase fin, y enséñale al usuario el cuadro (% de la app, tokens y coste del encargo, % estimado). Queda en `UNI\CLAUDE\registro-uso\uso_encargos.csv`.
+8. **Mejoras y uso al terminar** (obligatorio, también si el encargo se corta o se abandona):
+   - Pasa las mejoras del encargo a `scripts\MEJORAS.md` (regla 8) y, si toca revisión, díselo al usuario.
+   - Skill `control-uso`, fase fin, y enséñale al usuario el cuadro (% de la app, tokens y coste del encargo, % estimado). Queda en `UNI\CLAUDE\registro-uso\uso_encargos.csv`.
    Abre una sesión nueva por encargo: en una sesión larga cada respuesta relee todo el historial y el coste por respuesta crece.
 
 Plantilla de encargo (úsala siempre):
@@ -74,7 +80,9 @@ Devuelve: hecho / pendiente / revisar, archivos, 1 captura. Dudas como DUDA, no 
   - `nucleo\`: `util`, `capas`, `version`, `exportar`, `captura`, `_plantilla`.
   - `dibujo\`: `rellenos`, `planta` (parcial), `recortar_base`.
   - `revision\`: `holgura`.
-  - `sistema\`: `hook_equipo.ps1` y `uso_encargo.ps1`, que es un alias de la skill general.
+  - `sistema\`: `hook_equipo.ps1`, `hook_codigo.ps1` (anota el código improvisado de los subagentes) y `uso_encargo.ps1`, que es un alias de la skill general.
+  - `pruebas\`: `probar.ps1`, pruebas de regresión de los scripts listos (cómo se usan, en su `LEEME.md`).
+  - Mejoras pendientes de los scripts: `scripts\MEJORAS.md` (regla 8).
   - Los demás scripts del índice están "pendientes"; `lamina\`, `postpro\` y `entrega\` aún no tienen ninguno.
 - Registros: el control de uso está en `UNI\CLAUDE\registro-uso\uso_encargos.csv` (skill general `UNI\CLAUDE\.claude\skills\control-uso\`); el registro del equipo, en `arqui-taller\registro\equipo.log` (lo escribe el hook).
 - Skills: `C:\Users\2402l\Documents\UNI\CLAUDE\arqui-taller\.claude\skills\` (se cargan solas; antes de usar una, lee `_COMUN.md`).
