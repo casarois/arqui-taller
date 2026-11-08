@@ -1,13 +1,16 @@
 """Pruebas de consumo y controles sin llamar modelos ni abrir Rhino."""
 import argparse
+import base64
 import csv
 import json
+import os
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 
 from hook_equipo import decide, handle, inside
-from preparar_instalacion import CENTRAL, prepare
+from preparar_instalacion import CENTRAL, DESTINO, prepare
 from uso_encargo import apply_live_limits, plan_delta, read_usage, run, snapshot, token_delta
 
 
@@ -145,6 +148,27 @@ class Integration(unittest.TestCase):
         event["cwd"] = str(self.root / "codex-other")
         self.assertEqual(handle(event, target, logs), {})
         self.assertFalse(inside(self.root / "codex-other", target))
+
+    @unittest.skipUnless(os.name == "nt", "Entrada de hooks especifica de Windows")
+    def test_real_windows_hook_command_from_both_shells(self):
+        target = prepare(self.root / "entrada con espacios")
+        config = json.loads((target / ".codex" / "hooks.json").read_text(encoding="utf-8"))
+        command = config["hooks"]["PreToolUse"][0]["hooks"][0]["command"]
+        command = command.replace(str(DESTINO), str(target)) + f' -Registro "{self.root / "logs"}"'
+        event = {"hook_event_name": "PreToolUse", "cwd": str(target), "tool_name": "spawn_agent",
+                 "tool_input": {"agent_type": "critico", "message": "Español: edición"}}
+        encoded = base64.b64encode(command.encode("utf-16-le")).decode("ascii")
+        for invocation, use_shell in ((command, True),
+                (["powershell.exe", "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded], False)):
+            result = subprocess.run(invocation, shell=use_shell, input=json.dumps(event, ensure_ascii=False),
+                                    text=True, encoding="utf-8", capture_output=True, timeout=15)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(result.stdout.lstrip("\ufeff")), {})
+        event["tool_input"]["model"] = "otro"
+        result = subprocess.run(command, shell=True, input=json.dumps(event),
+                                text=True, encoding="utf-8", capture_output=True, timeout=15)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout.lstrip("\ufeff"))["hookSpecificOutput"]["permissionDecision"], "deny")
 
 
 if __name__ == "__main__":

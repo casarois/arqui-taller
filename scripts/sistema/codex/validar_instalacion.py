@@ -28,7 +28,7 @@ def validate(root, links=True):
     hooks = json.loads((root / ".codex" / "hooks.json").read_text(encoding="utf-8"))
     for event in ("PreToolUse", "SessionStart", "SubagentStart", "SubagentStop"):
         command = hooks["hooks"][event][0]["hooks"][0]["command"]
-        assert str(CENTRAL / "scripts" / "sistema" / "codex" / "hook_equipo.py") in command
+        assert str(CENTRAL / "scripts" / "sistema" / "codex" / "invocar_hook.ps1") in command
         assert str(DESTINO) in command
     shared = []
     if links:
@@ -43,7 +43,7 @@ def validate(root, links=True):
             assert os.path.samefile(entry / "SKILL.md", source), "Skill copiada"
             shared.append(source.parent.name)
         specific = root / ".agents" / "skills" / "control-uso" / "SKILL.md"
-        assert os.path.samefile(specific, CENTRAL / "adaptadores" / "codex" / "skills" / "control-uso" / "SKILL.md")
+        assert os.path.samefile(specific, CENTRAL / "scripts" / "sistema" / "codex" / "skills" / "control-uso" / "SKILL.md")
         assert os.path.samefile(root / "scripts" / "puente" / "rhino.ps1", CENTRAL / "scripts" / "puente" / "rhino.ps1")
     return {"taller": str(root), "perfiles": len(profiles), "fuentes_compartidas": shared,
             "configuracion": "valida", "rhino": "sin ejecutar", "hooks": "requieren confianza del usuario en Codex"}

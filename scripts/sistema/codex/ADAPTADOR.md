@@ -34,7 +34,7 @@ En Codex, leer las fuentes anteriores aplicando estas sustituciones concretas:
    Usar las herramientas de colaboracion disponibles para continuar el mismo
    trabajador. Los trabajadores no delegan ni preguntan al usuario.
 4. Usar la skill `control-uso` propia de Codex enlazada a
-   `adaptadores/codex/skills/control-uso`. No ejecutar el contador de Claude, no
+   `scripts/sistema/codex/skills/control-uso`. No ejecutar el contador de Claude, no
    usar `mcp__ccd_session_mgmt__get_usage`, ni sus precios/calibracion. El uso de
    los trabajadores lo suma el contador del orquestador cuando hay filiacion
    explicita en el registro. Un seguimiento del mismo encargo no abre otro.

@@ -57,5 +57,5 @@ foreach ($skill in Get-ChildItem -LiteralPath $skills -Directory) {
         Enlazar (Join-Path $final ".agents\skills\$($skill.Name)") $skill.FullName
     }
 }
-Enlazar (Join-Path $final '.agents\skills\control-uso') (Join-Path $central 'adaptadores\codex\skills\control-uso')
+Enlazar (Join-Path $final '.agents\skills\control-uso') (Join-Path $central 'scripts\sistema\codex\skills\control-uso')
 Write-Output "Instalado: $final | fuentes compartidas por Junction; ningun original sustituido"

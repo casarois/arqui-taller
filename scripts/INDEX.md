@@ -59,7 +59,7 @@ En las carpetas de proyectos no va ningún script: todos viven aquí.
 
 Codex se abre en `C:\Users\2402l\Documents\UNI\CODEX\arqui-taller`.
 Sus enlaces apuntan a este taller: los scripts Rhino anteriores no se duplican.
-Adaptación y mantenimiento: `adaptadores/codex/ADAPTADOR.md`.
+Adaptación y mantenimiento: `scripts/sistema/codex/ADAPTADOR.md`.
 Los scripts de integración siguientes se ejecutan **fuera de Rhino** con Python
 3.11+ (disponible en QGIS Python312) o PowerShell 7; sus informes son JSON, no el
 resumen de una línea de los scripts de dibujo.
@@ -68,6 +68,7 @@ resumen de una línea de los scripts de dibujo.
 |---|---|---|---|---|
 | sistema/codex | uso_encargo.py | Diferencia de tokens de la sesión exacta y sus descendientes identificados; muestras del plan de toda la cuenta; registro separado en registro/codex | `--fase inicio\|fin\|estado`, `--encargo`, `--sesion`, `--transcripcion`, `--sesiones`, `--registro`, `--limite-semanal=10` | listo; pruebas sintéticas y lectura real |
 | sistema/codex | hook_equipo.py | Comprueba lanzamientos de perfiles y registra eventos Codex sin guardar prompts; no cambia el hook de Claude | JSON por stdin, `--taller`, `--registro` | listo; pendiente de confianza/activación en nuevo proyecto |
+| sistema/codex | invocar_hook.ps1 | Entrada Windows del hook; conserva stdin JSON en UTF-8 desde PowerShell | `-Taller`, JSON por stdin | listo |
 | sistema/codex | preparar_instalacion.py | Genera TOML de agentes, config, hooks y documentos de entrada; cada perfil referencia sus instrucciones centrales | `--salida` | listo |
 | sistema/codex | instalar.ps1 | Instala entrada Codex y enlaces Junction; rechaza reemplazar archivos distintos y no borra ni mueve originales | `-Paquete`, `-Destino` (solo destino elegido) | listo |
 | sistema/codex | validar_instalacion.py | Comprueba perfiles, modelos, hooks y que skills/normas/scripts/proyectos sean los mismos archivos | `--taller` | listo |

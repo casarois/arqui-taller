@@ -31,7 +31,7 @@ def prepare(output):
             effort = "high"
         instructions = (
             f"Eres el perfil {name} del taller de arquitectura en Codex.\n"
-            f"Lee {CENTRAL / 'adaptadores' / 'codex' / 'ADAPTADOR.md'}.\n"
+            f"Lee {CENTRAL / 'scripts' / 'sistema' / 'codex' / 'ADAPTADOR.md'}.\n"
             f"Lee el cuerpo del perfil compartido {path}, omitiendo su frontmatter YAML.\n"
             "Sigue ese cuerpo y las reglas comunes que referencia. No copies ni mantengas otra version de ellas.\n"
             "El modelo y esfuerzo validos son los de este perfil TOML. Los nombres de modelos de Claude no se aplican.\n"
@@ -59,7 +59,7 @@ max_concurrent_threads_per_session = 3
 writable_roots = [{json.dumps(str(CENTRAL))}]
 '''
     write(output / ".codex" / "config.toml", config)
-    command = f'"{PYTHON}" -X utf8 "{CENTRAL / "scripts" / "sistema" / "codex" / "hook_equipo.py"}" --taller "{DESTINO}"'
+    command = f'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "{CENTRAL / "scripts" / "sistema" / "codex" / "invocar_hook.ps1"}" -Taller "{DESTINO}"'
     hooks = {"description": "Equipo del taller compartido: controles Codex y registro propio.", "hooks": {}}
     for event, matcher in (("PreToolUse", "^(Agent|spawn_agent)$"), ("SessionStart", "startup|resume|clear|compact|fork"),
                            ("SubagentStart", "*"), ("SubagentStop", "*")):
@@ -72,7 +72,7 @@ writable_roots = [{json.dumps(str(CENTRAL))}]
 Responde en espanol. Esta es una entrada al taller comun, no otra implementacion.
 Central: `{CENTRAL}`.
 
-Antes de trabajar, lee `{CENTRAL / 'adaptadores' / 'codex' / 'ADAPTADOR.md'}` y
+Antes de trabajar, lee `{CENTRAL / 'scripts' / 'sistema' / 'codex' / 'ADAPTADOR.md'}` y
 `{CENTRAL / 'CLAUDE.md'}`. El primero sustituye solo los elementos de plataforma
 (modelos, herramientas, hooks y consumo). Conserva el flujo y criterio de la
 fuente comun. Para tareas de arquitectura lee el PROYECTO.md y normas del proyecto.
@@ -128,7 +128,7 @@ Registro propio: `registro/` -> `central/registro/codex/`. El contador entrega
 tokens observados y diferencias del plan de toda la cuenta si hay muestras validas.
 No convierte esas cifras a coste o porcentaje atribuible al encargo sin calibracion.
 
-Documentacion de mantenimiento: `{CENTRAL / 'adaptadores' / 'codex' / 'ADAPTADOR.md'}`.
+Documentacion de mantenimiento: `{CENTRAL / 'scripts' / 'sistema' / 'codex' / 'ADAPTADOR.md'}`.
 Instalador: `{CENTRAL / 'scripts' / 'sistema' / 'codex' / 'instalar.ps1'}`.
 
 La validacion inicial de archivos y pruebas sinteticas no acredita todavia una
